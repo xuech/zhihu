@@ -1,41 +1,26 @@
 <template>
   <div class="container">
     <GlobalHeader :user='userData'/>
-    <ColumnList :list="list"/>
+    <router-view></router-view>
+    <footer class="text-center py-4 text-secondary bg-light mt-6">
+      <small>
+        <ul class="list-inline mb-0">
+          <li class="list-inline-item">© 2020 者也专栏</li>
+          <li class="list-inline-item">课程</li>
+          <li class="list-inline-item">文档</li>
+          <li class="list-inline-item">联系</li>
+          <li class="list-inline-item">更多</li>
+        </ul>
+      </small>
+    </footer>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import ColumnList, { ColumnProps } from './components/ColumnList.vue'
 import GlobalHeader, { UserProps } from './components/GlobalHeader.vue'
 import 'bootstrap/dist/css/bootstrap.min.css'
-const testData: ColumnProps[] = [
-  {
-    id: 1,
-    title: 'iOS',
-    avatar: '',
-    description: '这是移动端'
-  },
-  {
-    id: 2,
-    title: 'Android',
-    avatar: '',
-    description: '这是移动端'
-  },
-  {
-    id: 3,
-    title: 'Vue',
-    avatar: '',
-    description: '这是PC端'
-  },
-  {
-    id: 4,
-    title: 'React',
-    avatar: '',
-    description: '这是PC端'
-  }
-]
+
 const userData: UserProps = {
   isLogin: true,
   name: 'xch',
@@ -44,25 +29,12 @@ const userData: UserProps = {
 export default defineComponent({
   name: 'App',
   components: {
-    ColumnList,
     GlobalHeader
   },
   setup () {
     return {
-      list: testData,
       userData
     }
   }
 })
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
