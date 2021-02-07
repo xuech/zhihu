@@ -1,12 +1,22 @@
 <template>
   <div class="validate-input-container pb-3">
     <input
+      v-if="tag !== 'textarea'"
       class="form-control"
       :class="{'is-invalid': inputRef.error}"
       @blur="validateInput"
       v-model="inputRef.val"
       v-bind="$attrs"
     >
+    <textarea
+      v-else
+      class="form-control"
+      :class="{'is-invalid': inputRef.error}"
+      @blur="validateInput"
+      v-model="inputRef.val"
+      v-bind="$attrs"
+    >
+    </textarea>
     <span v-if="inputRef.error" class="invalid-feedback">{{inputRef.message}}</span>
   </div>
 </template>
@@ -24,12 +34,18 @@ interface RuleProp {
 /// 导出给外界用的
 export type RulesProp = RuleProp[]
 
+export type TagType = 'input' | 'textarea'
+
 export default defineComponent({
   name: 'ValidateInput',
   props: {
     rules: Array as PropType<RulesProp>,
     /// 1、input需要添加的属性
-    modelValue: String
+    modelValue: String,
+    tag: {
+      type: String as PropType<TagType>,
+      default: 'input'
+    }
   },
   /// 用来绑定根元素的内容，placehold，同时在input上v-bind="$attrs"
   inheritAttrs: false,
