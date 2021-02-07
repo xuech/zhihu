@@ -3,7 +3,8 @@ import { testData } from '../mock/testData'
 
 export default createStore({
   state: {
-    columns: testData
+    columns: testData,
+    token: ''
   },
   mutations: {
   },
