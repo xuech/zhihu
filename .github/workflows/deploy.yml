@@ -32,7 +32,6 @@ jobs:
           docker tag zhihu registry.cn-hangzhou.aliyuncs.com/xuech/zhihu:latest
           docker push registry.cn-hangzhou.aliyuncs.com/xuech/zhihu:latest
       - name: ssh docker login
-        uses: easingthemes/ssh-deploy@v2.1.5
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
