@@ -14,7 +14,6 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-
       # Runs a single command using the runners shell
       - name: checkout
         uses: actions/checkout@master
@@ -22,21 +21,21 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: install
         run: npm run install
-        
+
       - name: build project
         run: npm run build
-        
+
       - name: Build the Docker image
         run: |
-            docker login --username=${{ secrets.DOCKER_USERNAME }} registry.cn-hangzhou.aliyuncs.com --password=${{ secrets.DOCKER_PASSWORD }}
-            docker build -t zhihu:latest .
-            docker tag zhihu registry.cn-hangzhou.aliyuncs.com/xuech/zhihu:latest
-            docker push registry.cn-hangzhou.aliyuncs.com/xuech/zhihu:latest
+          docker login --username=${{ secrets.DOCKER_USERNAME }} registry.cn-hangzhou.aliyuncs.com --password=${{ secrets.DOCKER_PASSWORD }}
+          docker build -t zhihu:latest .
+          docker tag zhihu registry.cn-hangzhou.aliyuncs.com/xuech/zhihu:latest
+          docker push registry.cn-hangzhou.aliyuncs.com/xuech/zhihu:latest
       - name: ssh docker login
+        uses: easingthemes/ssh-deploy@v2.1.5
         uses: appleboy/ssh-action@master
-        with: 
-            host: ${{ secrets.SSH_HOST }} 
-            username: ${{ secrets.SSH_USERNAME }}
-            password: ${{ secrets.SSH_PASSWORD }}
-            script: cd ~ && sh zhihu-deploy.sh ${{ secrets.DOCKER_USERNAME }} ${{ secrets.DOCKER_PASSWORD }}
-
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: root
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: cd ~ && sh zhihu-deploy.sh ${{ secrets.DOCKER_USERNAME }} ${{ secrets.DOCKER_PASSWORD }}
