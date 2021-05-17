@@ -22,10 +22,9 @@
         />
       </div>
       <template #submit>
-        <button
-          type="submit"
-          class="btn btn-primary btn-block btn-large"
-        >登录</button>
+        <button type="submit" class="btn btn-primary btn-block btn-large">
+          登录
+        </button>
       </template>
     </validate-form>
   </div>
@@ -41,24 +40,26 @@ export default defineComponent({
   name: 'Login',
   components: {
     ValidateInput,
-    ValidateForm,
+    // eslint-disable-next-line comma-dangle
+    ValidateForm
   },
+  // eslint-disable-next-line space-before-function-paren
   setup() {
     // const router = useRouter()
     const emailVal = ref('')
     const passwordVal = ref('')
     const emailRules: RulesProp = [
       { type: 'required', message: '电子邮箱地址不能为空' },
-      { type: 'email', message: '请输入正确的电子邮箱格式' },
+      { type: 'email', message: '请输入正确的电子邮箱格式' }
     ]
     const passwordRules: RulesProp = [
-      { type: 'required', message: '密码不能为空' },
+      { type: 'required', message: '密码不能为空' }
     ]
     const onFormSubmit = (result: boolean) => {
       if (result) {
         const payload = {
           email: emailVal.value,
-          password: passwordVal.value,
+          password: passwordVal.value
         }
         console.log('提交的参数', payload)
         // setTimeout(() => {
@@ -71,8 +72,8 @@ export default defineComponent({
       passwordVal,
       emailRules,
       passwordRules,
-      onFormSubmit,
+      onFormSubmit
     }
-  },
+  }
 })
 </script>
