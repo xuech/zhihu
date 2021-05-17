@@ -3,7 +3,17 @@
 name: Docker Image CI
 
 # 执行时机
-on: [push]
+on:
+  push:
+    branches:
+      - 'master'
+    paths:
+      - ',github/workflows/*'
+      - 'src/**'
+      - 'Dockerfile'
+      - 'tsconfig.json'
+      - 'vhost.nginx.conf'
+      - 'zhihu-vue-deploy.sh'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
