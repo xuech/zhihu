@@ -1,3 +1,16 @@
+export interface GloablDataProps {
+  columns: ColumnProps[];
+  posts: PostProps[];
+  user: UserProps;
+}
+export interface UserProps {
+  isLogin: boolean;
+  nickName?: string;
+  _id?: string;
+  column?: string;
+  email?: string;
+  description?: string;
+}
 export interface ColumnProps {
   id: number;
   title: string;

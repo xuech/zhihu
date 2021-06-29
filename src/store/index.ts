@@ -1,12 +1,22 @@
 import { createStore } from 'vuex'
-import { testData } from '../mock/testData'
+import { GloablDataProps, testData, testPosts } from '../mock/testData'
 
-export default createStore({
+export default createStore<GloablDataProps>({
   state: {
     columns: testData,
-    token: ''
+    posts: testPosts,
+    user: {
+      isLogin: false
+    }
   },
   mutations: {
+    login (state) {
+      state.user = {
+        ...state.user,
+        isLogin: true,
+        nickName: 'xch'
+      }
+    }
   },
   actions: {
   },

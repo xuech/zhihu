@@ -34,18 +34,18 @@
 import { defineComponent, ref } from 'vue'
 import ValidateInput, { RulesProp } from '../components/ValidateInput.vue'
 import ValidateForm from '../components/ValidateForm.vue'
-// import { useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   name: 'Login',
   components: {
     ValidateInput,
-    // eslint-disable-next-line comma-dangle
     ValidateForm
   },
-  // eslint-disable-next-line space-before-function-paren
-  setup() {
-    // const router = useRouter()
+  setup () {
+    const store = useStore()
+    const router = useRouter()
     const emailVal = ref('')
     const passwordVal = ref('')
     const emailRules: RulesProp = [
@@ -63,7 +63,8 @@ export default defineComponent({
         }
         console.log('提交的参数', payload)
         // setTimeout(() => {
-        //   router.push('/')
+        router.push('/')
+        store.commit('login')
         // }, 2000)
       }
     }

@@ -17,21 +17,21 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import GlobalHeader, { UserProps } from './components/GlobalHeader.vue'
+import { defineComponent, computed } from 'vue'
+import GlobalHeader from './components/GlobalHeader.vue'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { useStore } from 'vuex'
+import { GloablDataProps } from '@/mock/testData'
 
-const userData: UserProps = {
-  isLogin: false,
-  name: 'xch',
-  nickName: 'xch'
-}
 export default defineComponent({
   name: 'App',
   components: {
     GlobalHeader
   },
   setup () {
+    const store = useStore<GloablDataProps>()
+    const userData = computed(() => store.state.user)
+
     return {
       userData
     }
